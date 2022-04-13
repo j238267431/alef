@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ALEF DEVELOPMENT</title>
+    <link rel="stylesheet" href="public/css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div id="app">
+    <div @click="closeMobileMenuClick($event)" class="container">
+        <div id="mobile_menu" class="mobile_menu" v-bind:class="{mobile_menu_show: show }">
+            <div class="mobile_menu_header">
+                <img @click="openCloseMobileMenu()" src="public/img/header/cross.png" alt="cross"/>
+            </div>
+            <ul class="mobile_menu_ul">
+                <a href="#"><li class="mobile_menu_li">постельное белье</li></a>
+                <a href="#"><li class="mobile_menu_li">одежда для дома</li></a>
+                <a href="#"><li class="mobile_menu_li">Одежда для улицы</li></a>
+                <a href="#"><li class="mobile_menu_li">ВЫход</li></a>
+            </ul>
+        </div>
+        <div v-scroll="handleScroll" class="header" v-bind:class="{hide_header: showHideHeader}">
+            <div class="header_logo"><a href="/">LOGO</a></div>
+            <div class="header_img">
+                <a href="#"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="8.45945" cy="4.18919" r="3.68919" stroke="#333333"/>
+                    <path d="M0.5 15.3379H15.5" stroke="#333333"/>
+                    <path d="M0.5 15.84C0.5 12.4347 4.84699 9.91339 8.21429 10.0023C11.4328 10.0872 15.5 12.4347 15.5 15.84" stroke="#333333"/>
+                    </svg></a>
+                <a href="#"><svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M7.89989 3.0948C6.69969 -2.52108 -2.59131 1.90389 1.76025 7.60175C6.11181 13.2996 8.3999 15.4908 8.3999 15.4908" stroke="#333333"/>
+                    <path d="M7.89409 3.0948C9.09429 -2.52108 18.7304 1.90389 14.3788 7.60175C10.0272 13.2996 7.69995 15.5 7.69995 15.5" stroke="#333333"/>
+                    <path d="M7.39099 2.70752L8.4043 2.70757L8.38337 3.24079H7.39099V2.70752Z" fill="#333333"/>
+                    </svg></a>
+                <a href="#"><svg width="16" height="17" viewBox="0 0 16 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1.25468 7.56595C1.13958 6.11201 2.2884 4.86865 3.74689 4.86865H12.2531C13.7116 4.86865 14.8604 6.11201 14.7453 7.56595L14.2203 14.1975C14.1174 15.4977 13.0323 16.5002 11.7281 16.5002H4.27189C2.96769 16.5002 1.88261 15.4977 1.77968 14.1975L1.25468 7.56595Z" stroke="#333333"/>
+                    <path d="M4.00005 9.5C4.00005 9.5 3.78335 1 8.00007 1C12.2168 1 12.0001 9.5 12.0001 9.5" stroke="#333333"/>
+                    </svg></a>
+                <a  href="#"><svg @click="openCloseMobileMenu()" width="18" height="13" viewBox="0 0 18 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <line y1="0.5" x2="18" y2="0.5" stroke="#333333"/>
+                    <line y1="12.5" x2="18" y2="12.5" stroke="#333333"/>
+                    <line y1="6.5" x2="18" y2="6.5" stroke="#333333"/>
+                    </svg></a>
+                
+            </div>
+        </div>
+    <div class="media_first_part">
+        <div class="slider">
+            <div class="slider_current_img">
+                <img :src="activeImagePath"/>
+                <ul class="slider_ul">           
+                    <li @click="changeSlider($event)" v-for="image of images" :key="images.id" class="slider_li" v-bind:class="{active_li: activeImagePath == image.imgBig }">
+                        <img :src="image.imgSmall"/>
+                        <div :data-path="image.imgBig" class="cover_li"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="product_container">
+            <div class="product">
+                <div id="product_name" class="product_header">
+                    Пижама для девочек
+                </div>
+                <div class="product_article">Арт. 02765/46</div>
+                <div class="product_feedback">
+                    <div class="product_feedback_text">Отзывы</div>
+                        <ul class="product_feedback_stars">
+                            <li v-for="index of 5" :key="index" class="product_feedback_star_li">
+                                <svg v-if="index==5" width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 2.565L5.485 3.71L5.72 4.265L6.32 4.315L7.555 4.42L6.615 5.235L6.16 5.63L6.295 6.22L6.575 7.425L5.515 6.785L5 6.465L4.485 6.775L3.425 7.415L3.705 6.21L3.84 5.62L3.385 5.225L2.445 4.41L3.68 4.305L4.28 4.255L4.515 3.7L5 2.565ZM5 0L3.595 3.315L0 3.62L2.73 5.985L1.91 9.5L5 7.635L8.09 9.5L7.27 5.985L10 3.62L6.405 3.315L5 0Z" fill="#333333"/>
+                                </svg>   
+                                <svg v-else width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M5 7.635L8.09 9.5L7.27 5.985L10 3.62L6.405 3.315L5 0L3.595 3.315L0 3.62L2.73 5.985L1.91 9.5L5 7.635Z" fill="#333333"/>
+                                </svg>
+                            </li>
+                        </ul>
+                        <div class="product_feedback_text"> {{feedbackQty}} Отзывов</div>
+                        <div class="product_feedback_arrow"><svg width="10" height="15" viewBox="0 0 10 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M1 1L9 8L1 14.5" stroke="#333333"/>
+                            </svg>
+                            </div>
+                </div>
+            </div> 
+            <div class="price">
+                <div class="price_new">{{price * (discount + activity) }} &#8381</div>
+                <div class="price_old">{{price}} &#8381</div>
+                <div class="product_feedback_arrow"><svg width="10" height="15" viewBox="0 0 10 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 1L9 8L1 14.5" stroke="#333333"/>
+                    </svg>
+                    </div>
+            </div>
+            <div class="discounts">
+                <div class="discount">скидка -{{discount * 100}}%</div>
+                <div class="activity">акция -{{activity * 100}}%</div>
+            </div>
+            <div class="select-wrapper">
+                <div class="select-arrow-3"></div>
+                <div class="select-arrow-3"></div>
+                <select>
+                    <option selected disabled>Выбрать размер</option>
+                    <option v-for="size of sizes" :key="size.id">{{size.name}}</option>
+                </select>
+            </div>
+            <div>
+                <a class="size_definition" href="#">Определить размер</a>
+            </div>
+            <div class="quantity">
+                <div @click="increase()" class="plus">+</div>
+                <div class="choosed_qty">{{choosedQty}}</div>
+                <div @click="decrease()" class="minus">-</div>
+            </div>
+            <div class="cart_button">
+                <a @click.prevent="showModalCartFav('корзину')" href="#" class="add_to_cart">Добавить в корзину</a>
+                <a @click.prevent="showModalCartFav('избранное')" class="cart_favourite" href="#"><svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="24" height="24" transform="translate(0 0.0439453)" fill="#333333"/>
+                    <path d="M11.8999 7.13874C10.6997 1.52287 1.40869 5.94784 5.76025 11.6457C10.1118 17.3436 12.3999 19.5348 12.3999 19.5348" stroke="white"/>
+                    <path d="M11.8941 7.13874C13.0943 1.52287 22.7304 5.94784 18.3788 11.6457C14.0272 17.3436 11.7 19.5439 11.7 19.5439" stroke="white"/>
+                    <path d="M11.391 6.75146L12.4043 6.75152L12.3834 7.28474H11.391V6.75146Z" fill="white"/>
+                    </svg></a>
+                    <div class="modalAddCartFavorite" v-bind:class="{show_modal: showModal}">
+                        <p>товар {{product}}</p>
+                        <p>в количестве {{choosedQty}} шт</p>
+                        <p>добавлен в {{place}}</p>
+                    </div>
+            </div>
+            <a href="#" class="quick_buy">Купить в 1 клик</a>
+            <hr/>
+            <ul class="product_description">
+                <li><img src="/public/img/payment/t-short.svg" alt="t-short"/><a href="#">Описание товара</a></li>
+                <li><img src="/public/img/payment/clock.svg" alt="clock"/><a href="#">Доставка и возврат</a></li>
+                <li><img src="/public/img/payment/card.svg" alt="card"/><a href="#">Способы оплаты</a></li>
+            </ul>
+        </div>
+    </div>
+        <div class="all_styles_div">
+            <a class="all_styles" href="#">Посмотреть все стили</a>
+        </div>
+        <div class="other_images">
+            <img src="/public/img/other_images/12296786-1 1.png" alt="12296786-1 1"/>
+            <div class="add_images">
+                <label class="add_images_label">
+                    <img class="add_images_img" src="/public/img/other_images/13986707-1 1.png" alt="13986707-1 1"/>
+                    <div class="add_img_cover">
+                        </div>
+                        <div class="add_img_cover_text">
+                            <svg width="32" height="35" viewBox="0 0 32 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.752161 10.9953C0.638177 9.54198 1.78674 8.2998 3.24451 8.2998H28.7555C30.2133 8.2998 31.3618 9.54198 31.2478 10.9953L29.5851 32.1953C29.4831 33.4962 28.3976 34.4998 27.0927 34.4998H4.90725C3.60235 34.4998 2.51694 33.4962 2.41491 32.1953L0.752161 10.9953Z" stroke="white"/>
+                                <path d="M7.004 18.4857C7.004 18.4857 6.54373 1 15.5 1C24.4563 1 23.996 18.4857 23.996 18.4857" stroke="white"/>
+                                </svg><p>Узнай, что на мне</p>
+                        </div>
+                </label>
+                <label class="add_images_label">
+                    <img class="add_images_img" src="/public/img/other_images/13986707-1 1 (1).png" alt="13986707-1 1 (1)"/>
+                    <div class="add_img_cover">
+                        </div>
+                        <div class="add_img_cover_text">
+                            <svg width="32" height="35" viewBox="0 0 32 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.752161 10.9953C0.638177 9.54198 1.78674 8.2998 3.24451 8.2998H28.7555C30.2133 8.2998 31.3618 9.54198 31.2478 10.9953L29.5851 32.1953C29.4831 33.4962 28.3976 34.4998 27.0927 34.4998H4.90725C3.60235 34.4998 2.51694 33.4962 2.41491 32.1953L0.752161 10.9953Z" stroke="white"/>
+                                <path d="M7.004 18.4857C7.004 18.4857 6.54373 1 15.5 1C24.4563 1 23.996 18.4857 23.996 18.4857" stroke="white"/>
+                                </svg><p>Узнай, что на мне</p>
+                        </div>
+                </label>
+                <label class="add_images_label">
+                    <img class="add_images_img" src="/public/img/other_images/8395943-1 1.png" alt="8395943-1 1"/>
+                    <div class="add_img_cover">
+                        </div>
+                        <div class="add_img_cover_text">
+                            <svg width="32" height="35" viewBox="0 0 32 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.752161 10.9953C0.638177 9.54198 1.78674 8.2998 3.24451 8.2998H28.7555C30.2133 8.2998 31.3618 9.54198 31.2478 10.9953L29.5851 32.1953C29.4831 33.4962 28.3976 34.4998 27.0927 34.4998H4.90725C3.60235 34.4998 2.51694 33.4962 2.41491 32.1953L0.752161 10.9953Z" stroke="white"/>
+                                <path d="M7.004 18.4857C7.004 18.4857 6.54373 1 15.5 1C24.4563 1 23.996 18.4857 23.996 18.4857" stroke="white"/>
+                                </svg><p>Узнай, что на мне</p>
+                        </div>
+                </label>
+                <label class="add_images_label">
+                    <img class="add_images_img" src="/public/img/other_images/14896421-1 1.png" alt="14896421-1 1"/>
+                    <div class="add_img_cover">
+                        </div>
+                        <div class="add_img_cover_text">
+                            <svg width="32" height="35" viewBox="0 0 32 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M0.752161 10.9953C0.638177 9.54198 1.78674 8.2998 3.24451 8.2998H28.7555C30.2133 8.2998 31.3618 9.54198 31.2478 10.9953L29.5851 32.1953C29.4831 33.4962 28.3976 34.4998 27.0927 34.4998H4.90725C3.60235 34.4998 2.51694 33.4962 2.41491 32.1953L0.752161 10.9953Z" stroke="white"/>
+                                <path d="M7.004 18.4857C7.004 18.4857 6.54373 1 15.5 1C24.4563 1 23.996 18.4857 23.996 18.4857" stroke="white"/>
+                                </svg><p>Узнай, что на мне</p>
+                        </div>
+                </label>
+            </div>
+        </div>
+        <div class="product_container footer_wrapper">
+            <div class="footer">
+                <div class="footer_left_part">
+                    <div class="footer_left_part_header">покупателям</div>
+                    <ul>
+                        <li><a href="#">Каталог</a></li>
+                        <li><a href="#">Акции</a></li>
+                        <li><a href="#">Бренды</a></li>
+                    </ul>
+                </div>
+                <div class="footer_right_part">
+                    <div class="footer_right_part_header">о нас</div>
+                    <ul>
+                        <li><a href="#">О компании</a></li>
+                        <li><a href="#">Новости</a></li>
+                        <li><a href="#">Команда</a></li>
+                    </ul>
+                </div>
+            </div>
+            <footer class="footer_path_2">
+                <div class="footer_text">
+                    Узнайте первыми о новинках и акциях
+                </div>
+                    <p class="errors" v-if="errors.length">
+                    <b>Пожалуйста исправьте указанные ошибки:</b>
+                    <ul class="errors">
+                      <li v-for="error in errors">{{ error }}</li>
+                    </ul>
+                  </p>
+                <label class="email" for="email">
+                    <img @click="removeEmail()" src="public/img/header/cross.png" alt="cross"/>
+                    <input v-on:keyup.enter="checkForm()" v-model="email" name="email" class="footer_input" type="text" placeholder="Адрес электронной почты"/>
+                </label>
+                <hr style="margin-top:12px;">
+                <div class="subscribe_div">
+                    <a @click.prevent="checkForm" class="subscribe" href="">Подписаться</a>
+                </div>
+                
+            </footer>
+        </div>
+    </div>
+</div>
+<!-- <script type="application/javascript" src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14"></script>
+<script type="application/javascript">
+Vue.directive('scroll', {
+    inserted: function (el, binding) {
+      let f = function (evt) {
+        if (binding.value(evt, el)) {
+          window.removeEventListener('scroll', f)
+        }
+      }
+      window.addEventListener('scroll', f)
+    }
+  })
+</script>
+<script type="application/javascript">
+    const app = new Vue({
+        el: '#app',
+        data: {
+            errors: [],
+            email: '',
+            showHideHeader: false,
+            product: '',
+            place: '',
+            mobileMenuSize: 0,
+            choosedQty: 1,
+            price: 1500,
+            discount: 0.33,
+            activity: 0.20,
+            feedbackQty: 14,
+            show: false,
+            showModal: false,
+            activeImagePath: "public/img/slider/14896420-2 1.png",
+            stars: [
+                {starImgPath: ''}
+            ],
+            images: [
+                {imgSmall: 'public/img/slider/14896420-2 2.png', imgBig: 'public/img/slider/14896420-2 1.png'},
+                {imgSmall: 'public/img/slider/14896420-1 1.png', imgBig: 'public/img/slider/14896420-1 1.png'},
+                {imgSmall: 'public/img/slider/14896420-3 1.png', imgBig: 'public/img/slider/14896420-3 1.png'},
+                {imgSmall: 'public/img/slider/14896420-4 1.png', imgBig: 'public/img/slider/14896420-4 1.png'},
+                {imgSmall: 'public/img/slider/14896420-5 1.png', imgBig: 'public/img/slider/14896420-5 1.png'},
+            ],
+            sizes: [
+                {name:'S'},
+                {name:'M'},
+                {name:'L'},
+                {name:'XL'},
+            ]
+        },
+        methods: {
+            changeSlider(event){
+                let choosedImagePath = event.target.dataset['path']
+                this.activeImagePath = choosedImagePath;
+                console.log(event);
+            },
+            openCloseMobileMenu(){
+                this.show = !this.show;
+            },
+            closeMobileMenuClick(event){
+                if(event.pageY > this.mobileMenuSize){
+                    this.show = false;
+                }
+            },
+            increase(){
+                this.choosedQty++;
+            },
+            decrease(){
+                if(this.choosedQty != 1){
+                    this.choosedQty--;
+                }
+            },
+            showModalCartFav(place){
+                this.place = place;
+                this.showModal = true;
+                setTimeout(()=>{
+                    this.showModal = false;  
+                }, 1500)                
+            },
+            headerHideShow(event){
+                console.log(event);
+            },
+            handleScroll: function (evt, el) {
+                if (window.scrollY > 30) {
+                    this.showHideHeader = true;
+                } else {
+                    this.showHideHeader = false;
+                }
+            },
+            checkForm: function (e) {
+                this.errors = [];
+                if (!this.email) {
+                    this.errors.push('Укажите электронную почту.');
+                } else if (!this.validEmail(this.email)) {
+                    this.errors.push('Укажите корректный адрес электронной почты.');
+                }
+                if (!this.errors.length) {
+                    return true;
+                }
+            },
+            validEmail: function (email) {
+                var re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+            return re.test(email);
+            },
+            removeEmail(){
+                this.email = '';
+            },
+        },
+       
+        computed: {
+
+        },
+        mounted() {
+            this.mobileMenuSize = document.getElementById('mobile_menu').offsetHeight;
+            this.product = document.getElementById('product_name').innerText;
+        }
+    });
+</script>
+</body>
+</html>
